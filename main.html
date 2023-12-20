@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    #inputField {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  </style>
+  <title>Dynamic Input Field</title>
+</head>
+<body>
+<h1 style="text-align: center;">Hello world!</h1>
+<input type="text" id="inputField" placeholder="input here!!!!!">
+
+<script>
+  function MjAyM0JTQ3t0aGlzIGlzIGJhc2U2NCBra2trfQ(input) {
+    var keyStr = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
+
+    function getBase64Value(char) {
+      return keyStr.indexOf(char);
+    }
+
+    var output = "";
+    var chr1, chr2, chr3;
+    var enc1, enc2, enc3, enc4;
+    var i = 0;
+
+    input = input.replace(/[^A-Za-z0-9+/=]/g, "");
+
+    while (i < input.length) {
+      enc1 = getBase64Value(input.charAt(i++));
+      enc2 = getBase64Value(input.charAt(i++));
+      enc3 = getBase64Value(input.charAt(i++));
+      enc4 = getBase64Value(input.charAt(i++));
+
+      chr1 = (enc1 << 2) | (enc2 >> 4);
+      chr2 = ((enc2 & 15) << 4) | (enc3 >> 2);
+      chr3 = ((enc3 & 3) << 6) | enc4;
+
+      output = output + String.fromCharCode(chr1);
+
+      if (enc3 !== 64) {
+        output = output + String.fromCharCode(chr2);
+      }
+      if (enc4 !== 64) {
+        output = output + String.fromCharCode(chr3);
+      }
+    }
+
+    return decodeURIComponent(escape(output));
+  }
+
+  function showAlert() {
+    var inputValue = document.getElementById('inputField').value;
+    if (inputValue.toLowerCase() === 'hello world!') {
+      var decodedMessage = MjAyM0JTQ3t0aGlzIGlzIGJhc2U2NCBra2trfQ("MjAyM0JTQ3t0aGlzIGlzIGJhc2U2NCBra2trfQ");
+      alert(decodedMessage);
+    }
+  }
+
+  function moveInputField() {
+    var inputField = document.getElementById('inputField');
+    var windowWidth = window.innerWidth;
+    var windowHeight = window.innerHeight;
+
+    var randomX = Math.floor(Math.random() * (windowWidth - 200));
+    var randomY = Math.floor(Math.random() * (windowHeight - 50));
+
+    inputField.style.left = randomX + 'px';
+    inputField.style.top = randomY + 'px';
+  }
+
+  setInterval(moveInputField, 500);
+  document.getElementById('inputField').addEventListener('input', showAlert);
+</script>
+
+</body>
+</html>
